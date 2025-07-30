@@ -279,15 +279,15 @@ Thank you for reviewing our paper and providing such insightful feedback. We gre
 
 As **SE-Agent** is designed with efficiency in mind, particularly when compared to frameworks like SWE-Search (based on MCTS), we conduct additional experiments to quantify the average inference time required to solve a single instance successfully. This evaluation focuses on the average wall-clock time per solved case, which we believe is a practical metric for real-world deployment and large-scale adoption. The results are as follows:
 
-| Method               | Times (min) | Resolved Rate (%) |
-|----------------------|-------------|-------------------|
-| SWE-Agent            | 15.61       | 40.6              |
-| SWE-Search (MCTS)    | 33.42       | 47.4              |
-| **SE-Agent (Ours)**  | **31.06**   | **61.2**          |
+| Method               | Time Cost (min) | Resolved Rate (%) |
+|----------------------|-----------------|-------------------|
+| SWE-Agent            | 15.61           | 40.6              |
+| SWE-Search (MCTS)    | 33.42           | 47.4              |
+| **SE-Agent (Ours)**  | **31.06**       | **61.2**          |
 
 *All results are based on Claude-3.7-Sonnet model*
 
-**Our findings show that SE-Agent consistently achieves lower inference time compared to SWE-Search**. This confirms the advantage of our method in **avoiding the heavy computational cost** associated with test-time scaling techniques like MCTS. The proposed SE-Agent not only **improves performance** but also enables **efficient exploration** without incurring significant inference overhead. We will include this comparison and discussion in the revised version of the paper to better support our claims regarding SE-Agent's practical efficiency.
+**Our findings show that SE-Agent consistently achieves lower inference time compared to SWE-Search(MCTS)**. This confirms the advantage of our method in **avoiding the heavy computational cost** associated with test-time scaling techniques like MCTS. The proposed SE-Agent not only **improves performance** but also enables **efficient exploration** without incurring significant inference overhead. We will include this comparison and discussion in the revised version of the paper to better support our claims regarding SE-Agent's practical efficiency.
 
 Due to time constraints, we are currently only able to provide inference time comparison results based on Claude-3.7-Sonnet. However, we fully recognize the importance of this evaluation and commit to including a comprehensive inference time analysis—covering all relevant baselines—in the revised version of the paper.
 
@@ -314,7 +314,7 @@ This mechanism fosters **emergent intelligence at the population level**. In our
 
 ### The Choice of Benchmark (For W2)
 
-We focus on **SWE-bench Verified** in this work because it presents significant challenges, requiring cross-file bug localization, patch generation, and test validation over real-world repositories. Even top-performing models currently achieve only 50%–60% success on this benchmark. Additionally, its tasks naturally involve rich interaction trajectories, making it a fitting testbed for SE-Agent. Moreover, we note that leading related works, such as SWE-agent and SWE-search, also report their main results on **SWE-bench Verified**. Strong performance in this setting thus provides a meaningful indicator of effectiveness on similarly complex tasks.
+We focus on **SWE-bench Verified** in this work because it presents significant challenges, requiring cross-file bug localization, patch generation, and test validation over real-world repositories. Even top-performing models currently achieve only 50%–60% success on this benchmark. Additionally, its tasks naturally involve rich interaction trajectories, making it a fitting testbed for SE-Agent. Moreover, we note that leading related works, such as **SWE-agent and SWE-search**, also report their main results on **SWE-bench Verified**. Strong performance in this setting thus provides a meaningful indicator of effectiveness on similarly complex tasks.
 
 To our knowledge, LiveCodeBench is a dynamically updated competitive programming benchmark that emphasizes single-turn generation and algorithmic reasoning, rather than multi-step interaction or environment feedback. In contrast, Terminal-Bench is specifically designed to evaluate agents in interactive terminal-based tasks, such as compilation, installation, script execution, and service setup. This benchmark aligns well with the capabilities of SE-Agent, and we are excited about its potential in that domain. However, adapting our method to Terminal-Bench involves additional engineering, so we leave this as a promising direction for future work.
 
