@@ -87,21 +87,21 @@ Select the highest-scoring trajectory from candidates as the final solution:
 
 ### **Ground Truth Leakage Concern (For W2)**
 
-We acknowledge that our use of the term **"test pass rate"** may have led to confusion, as it could be misinterpreted as indicating the use of ground-truth tests. In fact, the "pass rate" refers only to the internal validation of structural constraints necessary for a trajectory to be considered valid and potentially effective—**not whether it actually solves the task**. We will revise this in the final version, modifying it to **"validation rate"** and describing our evaluation function in more detail.
+Our evaluation function consists of two components: 
 
-Our **evaluation function** consists of two components: 
+1. **Rule-based reward**, denoted as AutoEval()
+2. **Model-based reward**, denoted as ExpertEval()
 
-1. **Rule-based reward**, denoted as **AutoEval()**
-2. **Model-based reward**, denoted as **ExpertEval()**
-
-**Important**: Neither component relies on ground-truth labels or executes any actual tests. 
+**Important**: Neither component relies on ground-truth labels. 
 
 To elaborate, **AutoEval()** is a rule-based mechanism designed to assess whether a generated trajectory meets minimal submission criteria. These criteria include, but are not limited to: 
 - Ensuring the final patch file is non-empty
 - Verifying that the trajectory contains a sufficient proportion of code-editing steps
 - Checking whether the trajectory length falls within a reasonable range
 
-This procedure **does not execute any code, run any tests, or access ground-truth labels**. It only performs static analysis of the trajectory structure.
+This procedure **does not require access to ground-truth labels** or test oracles.
+
+We acknowledge that our use of the term **"test pass rate"** may have led to confusion, as it could be misinterpreted as indicating the use of ground-truth tests. In fact, the "pass rate" refers only to the internal validation of structural constraints necessary for a trajectory to be considered valid and potentially effective—**not whether it actually solves the task**. We will revise this in the final version, modifying it to **"validation rate"** and describing our evaluation function in more detail.
 
 ### **Concrete Examples (For W3)**
 
@@ -285,11 +285,11 @@ Thank you for reviewing our paper and providing such insightful feedback. We gre
 
 As **SE-Agent** is designed with efficiency in mind, particularly when compared to frameworks like SWE-Search (based on MCTS), we conduct additional experiments to quantify the average inference time required to solve a single instance successfully. This evaluation focuses on the average wall-clock time per solved case, which we believe is a practical metric for real-world deployment and large-scale adoption. The results are as follows:
 
-| Method               | Inference Time (min) | Resolved Rate (%) |
-|----------------------|---------------------|-------------------|
-| SWE-Agent            | 15.61               | 40.6              |
-| SWE-Search (MCTS)    | 33.42               | 47.4              |
-| **SE-Agent (Ours)**  | **31.06**           | **61.2**          |
+| Method               | Time Cost (min) | Resolved Rate (%) |
+|----------------------|-----------------|-------------------|
+| SWE-Agent            | 15.61           | 40.6              |
+| SWE-Search (MCTS)    | 33.42           | 47.4              |
+| **SE-Agent (Ours)**  | **31.06**       | **61.2**          |
 
 *All results are based on Claude-3.7-Sonnet model*
 
