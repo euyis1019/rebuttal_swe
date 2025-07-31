@@ -114,16 +114,16 @@ We will add a dedicated limitation section in the final version to discuss compu
 
 ## Response to Reviewer c1xU
 
-Thank you for your detailed feedback. We appreciate your recognition of the strengths of our work: the paper thoroughly articulates the need for more diverse and optimized multi-step reasoning in LLM agents, and the three-step mechanism (**Revision**, **Recombination**, and **Refinement**) represents a substantial advancement over existing trajectory sampling and MCTS methods. We are also grateful for your positive evaluation of the performance improvements demonstrated on the SWE-bench benchmark. Below, we address each of your main concerns in detail:
+Thank you for your detailed feedback. We appreciate your recognition that our three-step mechanism represents a substantial advancement over existing trajectory sampling and MCTS methods. Below, we address each of your main concerns:
 
 
 ### **Clarification on the Term "Self-Evolution" (For W1)**
 
-We greatly appreciate this important question regarding terminology. We understand the reviewer's concerns about our use of the term **"self-evolution,"** and would like to clarify why we believe this term accurately captures the essence of our approach. SE-Agent embodies a **genuine evolutionary principle** that goes beyond individual trajectory sampling:
+We understand the reviewer's concerns about our use of the term **"self-evolution."** SE-Agent embodies a **genuine evolutionary principle** that goes beyond individual trajectory sampling:
 
 **1) Addressing the Homogenization Problem:**
 
-Traditional multi-trajectory sampling often suffers from severe homogenization—multiple trajectories tend to converge to structurally similar solutions, especially when using smaller models. Although multiple samples are generated, the effective search space remains limited. We observed similar findings in our experiments with DeepSeek-R1, where smaller models trained with GRPO actually performed worse than those using distillation.
+Traditional multi-trajectory sampling suffers from severe homogenization—trajectories converge to similar solutions, especially with smaller models. The effective search space remains limited despite multiple samples.
 
 **2) A True Evolutionary Mechanism:**
 
@@ -220,13 +220,9 @@ Select the highest-scoring trajectory from candidates as the final solution:
 
 ### **Experimental Fairness (For W2)**
 
-Thank you for raising this important concern regarding the fairness of our experimental comparisons. We **fully acknowledge** that using different model versions in Figure 2 might affect the fairness of our comparisons.
+We acknowledge using different model versions might affect comparison fairness. We conducted **additional experiments** using the same model across all methods:
 
-To ensure a more rigorous and fair evaluation, we conducted **additional experiments** after the paper submission, using the same model across all methods:
-
-**Updated Experimental Results:**
-
-We standardized all experimental conditions by using **Claude-4-Sonnet** as the base model for every method. The results are shown below:
+**Updated Results with Claude-4-Sonnet:**
 
 | Method                          | Performance on SWE-bench Verified |
 |---------------------------------|-----------------------------------|
@@ -237,13 +233,11 @@ We standardized all experimental conditions by using **Claude-4-Sonnet** as the 
 | TRAE                            | 75.2%                            |
 | **SE-Agent + Claude 4 Sonnet**  | **80.0%**                        |
 
-*All experiments use Claude-4-Sonnet as the backbone model for fair comparison.*
-
-These results further validate the **generality and effectiveness** of our self-evolution framework, achieving **SOTA performance** on SWE-bench Verified. We are currently submitting these performance results to the **SWE-bench leaderboard**.
+These results validate our framework's effectiveness, achieving **SOTA performance** on SWE-bench Verified.
 
 ### **More Ablation Study of Refinement (For W3)**
 
-Thank you for your insightful comments. We initially did not include an ablation study for the Refinement operation because it plays a **central role** within the SE-Agent framework. However, to ensure the completeness of our ablation analysis, we have now conducted additional experiments by removing the Refinement component:
+To ensure completeness of our ablation analysis, we conducted additional experiments removing the Refinement component:
 
 | Model            | SE-Agent | w/o Revision | w/o Recombination | w/o Refinement | w/o All |
 |------------------|----------|--------------|-------------------|---------------|---------|
@@ -257,23 +251,18 @@ The results demonstrate that **all three components make significant contributio
 
 ### **Clarification on "Pilot Trajectories" (For W4)**
 
-"Pilot trajectories" refer simply to the trajectories generated in the initial stage using different planning strategies. Specifically:
-
-**Multi-strategy trajectory generation:**
+"Pilot trajectories" are initial trajectories using different planning strategies:
 - **P-greedy**: Rapid localization and fixing
 - **P-systematic**: Systematic problem analysis
 - **P-defensive**: Defensive programming approach
 - **P-minimal**: Minimal modification
-- **P-comprehensive**: Comprehensive testing and validation
+- **P-comprehensive**: Comprehensive testing
 
-These diverse initial trajectories provide the **foundation** for subsequent evolutionary operations, ensuring **broad coverage of the solution space** from the very beginning. Baseline methods can also utilize these diverse initial trajectories; however, they **lack our mechanism** for cross-trajectory interaction and evolution.
+These provide the **foundation** for evolutionary operations, ensuring **broad solution space coverage**. Baselines lack our cross-trajectory interaction mechanism.
 
 ### **Additional Clarifications**
 
-- **Spelling Correction**: Thank you for pointing out the typo in line 120; we will correct it in the revised version.
-- **Limitation Discussion**: We will add a dedicated **"Limitations"** section in the revised version to clearly discuss the computational overhead, applicable scope, and potential constraints of our approach.
-
-We believe these clarifications and additional experiments **fully address** the reviewer's concerns and demonstrate the **robustness and fairness** of our evaluation. SE-Agent achieves significant performance improvements through genuine trajectory-level evolution, which **cannot be attained** by traditional sampling methods.
+We will correct the typo in line 120 and add a **"Limitations"** section discussing computational overhead and applicable scope. These clarifications demonstrate SE-Agent's **robustness** through genuine trajectory-level evolution **unattainable by traditional sampling methods**.
 
 
 ## Response to Reviewer JbMn
@@ -300,33 +289,32 @@ Due to time constraints, we are currently only able to provide inference time co
 
 ## Response to Reviewer aGqC
 
-Thank you for reviewing our paper and providing such insightful feedback. We greatly appreciate your positive comments highlighting the **strong empirical results** and the substantial relative improvements our method achieves over established baselines on the challenging SWE-bench benchmark. We are also pleased that you recognized the generalizability of our approach across both open-source and closed-source LLMs. We have thoroughly addressed your concerns as follows:
+Thank you for your insightful feedback and recognition of our **strong empirical results** and substantial improvements over baselines on SWE-bench. We address your concerns as follows:
 
 ### **The contributions of SE-Agent (For W1)**
 
-We agree that leveraging historical experience for improvement is indeed an integral part of our approach, and ablation studies have demonstrated its importance. However, it is important to clarify that this component is actually built upon the **interaction and recombination of multiple trajectories**, followed by further self-evolution. This process corresponds to the crossover and mutation operations in genetic evolutionary theory. The core contribution of SE-Agent fundamentally lies in **expanding the search space through multi-trajectory interaction**, thus overcoming the cognitive limitations of single-trajectory reasoning. It is not merely about refining or improving a single trajectory based on past experience.
+While leveraging historical experience is part of our approach, SE-Agent's core contribution lies in **expanding the search space through multi-trajectory interaction**, overcoming single-trajectory reasoning limitations. This process corresponds to crossover and mutation operations in genetic evolutionary theory, not merely refining individual trajectories.
 
-ExpeL and AvaTar are both representative studies of experience-based improvement and iterative optimization. However, they share a common limitation: the lack of a mechanism for **cross-trajectory interaction**. Even if self-reflection is performed, the isolated nature of individual trajectories makes them prone to cognitive limitations and local optima.
+ExpeL and AvaTar lack **cross-trajectory interaction** mechanisms. Despite self-reflection, isolated trajectories remain prone to cognitive limitations and local optima.
 
-Similar insights are observed in our experiments with DeepSeek-R1: smaller models trained with GRPO performed worse than those using distillation. This is primarily due to the severe homogenization of independently sampled trajectories, which fails to expand the search space effectively. Classic techniques such as MCTS can enlarge the search space by generating multiple candidate paths, but due to the absence of timely information exchange among these paths, the search efficiency remains low, and the search space is still limited. In contrast, while classic MCTS generates multiple candidate paths from independent sampling of the same model, these paths lack real-time information flow and complementary collaboration, resulting in limited search efficiency and a narrower solution space compared to what our trajectory interaction mechanism can achieve in terms of breadth and diversity.
+Our DeepSeek-R1 experiments show smaller models with GRPO performed worse than distillation due to trajectory homogenization. Classic MCTS generates multiple paths but lacks real-time information exchange, resulting in limited search efficiency compared to our trajectory interaction mechanism.
 
-**Compared to MCTS**: Our experiments show that SE-Agent achieves **significant improvements** over MCTS-based methods in both search efficiency and effectiveness. SE-Agent introduces a **trajectory-level evolutionary mechanism**, enabling information exchange across different reasoning paths. This cross-trajectory interaction provides two key benefits: 
+**Compared to MCTS**: SE-Agent introduces **trajectory-level evolutionary mechanisms** enabling information exchange across reasoning paths, providing:
 
-a. **Breaking cognitive boundaries**: Through competition and collaboration among trajectories, we overcome the limitations of individual reasoning paths.
+a. **Breaking cognitive boundaries**: Competition and collaboration overcome individual path limitations
+b. **Knowledge transfer**: Successful patterns transfer across trajectories through recombination
 
-b. **Knowledge transfer**: Our recombination process facilitates the transfer of successful reasoning patterns across trajectories, while the revision step uses these recombined trajectories as targeted references for further improvement.
-
-This mechanism fosters **emergent intelligence at the population level**. In our experiments, different LLMs consistently exhibited evolutionary improvements (as shown in Table 1), with relative gains of up to **112% (Llama-3.1-70B)** and **51% (Claude-3.7-Sonnet)**, demonstrating **true capability evolution** that surpasses what can be achieved by sampling individual trajectories alone.
+This fosters **emergent population-level intelligence**. Our experiments show relative gains up to **112% (Llama-3.1-70B)** and **51% (Claude-3.7-Sonnet)**, demonstrating **true capability evolution** beyond individual trajectory sampling.
 
 ### **The Choice of Benchmark (For W2)**
 
-We focus on **SWE-bench Verified** in this work because it presents significant challenges, requiring cross-file bug localization, patch generation, and test validation over real-world repositories. Even top-performing models currently achieve only 50%–60% success on this benchmark. Additionally, its tasks naturally involve rich interaction trajectories, making it a fitting testbed for SE-Agent. Moreover, we note that leading related works, such as **SWE-agent and SWE-search**, also report their main results on **SWE-bench Verified**. Strong performance in this setting thus provides a meaningful indicator of effectiveness on similarly complex tasks.
+We focus on **SWE-bench Verified** because it presents significant challenges requiring cross-file bug localization, patch generation, and test validation over real-world repositories. Even top models achieve only 50-60% success. Leading works like **SWE-agent and SWE-search** report main results on this benchmark.
 
-To our knowledge, LiveCodeBench is a dynamically updated competitive programming benchmark that emphasizes single-turn generation and algorithmic reasoning, rather than multi-step interaction or environment feedback. In contrast, Terminal-Bench is specifically designed to evaluate agents in interactive terminal-based tasks, such as compilation, installation, script execution, and service setup. This benchmark aligns well with the capabilities of SE-Agent, and we are excited about its potential in that domain. However, adapting our method to Terminal-Bench involves additional engineering, so we leave this as a promising direction for future work.
+LiveCodeBench emphasizes single-turn generation rather than multi-step interaction. Terminal-Bench aligns well with SE-Agent's capabilities but requires additional engineering work—a promising future direction.
 
 ### **A description of the Operators (For W3&W4)**
 
-In order to better demonstrate our specific operations (**Revision**, **Recombination**, and **Refinement**), we show a specific case below.
+We demonstrate our specific operations through the following case:
 
 ##### **Case Study: Fixing UnrecognizedUnit.__eq__ in Astropy**
 
@@ -410,15 +398,17 @@ Select the highest-scoring trajectory from candidates as the final solution:
 
 ### **Discussion of Resource Overhead (For W5)**
 
-Overall, while our method introduces **additional cost** due to its use of multiple trajectories, we believe this overhead is **justified by the significant performance gains** it enables. The design is intended to overcome the limitations of single-trajectory reasoning, which often leads to suboptimal solutions.
+While our method introduces **additional cost** due to multiple trajectories, this overhead is **justified by significant performance gains**.
 
-In Figure 5, the unit of "Maximum Cost" is **USD** (LLM backbone is Claude-3.7 Sonnet API). For example, if the maximum cost is limited to **`$2`**, execution will be terminated when the cost of an agent exceeds `$2` for each task.
+In Figure 5, "Maximum Cost" is in **USD** (Claude-3.7 Sonnet API). At `$2` limit, execution terminates when cost exceeds `$2` per task.
 
-We have conducted additional experiments to better analyze the trade-off between cost and performance. When the maximum cost is limited to `$1`, **SE-Agent** achieves 41.6%, slightly below SWE-Search (43.8%) but still above SWE-Agent (38.4%). When the cap is raised to `$2`, all methods approach their best performance, but **SE-Agent** significantly outperforms the baselines (**61.2%** vs. SWE-Search's 47.4% and SWE-Agent's 40.6%). 
+Cost-performance analysis shows:
+- At `$1` limit: SE-Agent (41.6%) vs. SWE-Search (43.8%) vs. SWE-Agent (38.4%)
+- At `$2` limit: **SE-Agent (61.2%)** vs. SWE-Search (47.4%) vs. SWE-Agent (40.6%) 
 
 Moreover, we report Cost per Resolved Instance without any budget cap: 
 - **SE-Agent: `$3.54`**
 - SWE-Search: `$4.08`
 - SWE-Agent: `$4.66`
 
-This indicates that, despite a higher initial cost per run, SE-Agent is **more cost-efficient** in terms of successfully solving tasks.
+Despite higher initial cost per run, SE-Agent is **more cost-efficient** for successfully solving tasks.
