@@ -5,6 +5,8 @@ Thank you for your detailed feedback. We appreciate your recognition of our inte
 
 ## **Method Implementation Details (For W1)**
 
+Thank you for your constructive feedback regarding the need for more concrete implementation details. We acknowledge that the main paper's description is relatively high-level to maintain clarity and space constraints. Appendix B provides detailed implementation specifics, including concrete prompt templates and execution logic for each operation. To better illustrate the concrete implementation of our method, we provide a complete case study demonstrating how SE-Agent progressively optimizes trajectories through its three core operations.
+
 ### **Case Study: Fixing UnrecognizedUnit.__eq__ in Astropy**
 
 Problem Description: Astropy's UnrecognizedUnit.__eq__ method throws exceptions instead of returning False when compared with None, violating Python's safety conventions for comparison operations.
