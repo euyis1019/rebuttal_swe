@@ -1,11 +1,11 @@
-## Response to Reviewer DjBE
+# Response to Reviewer DjBE
 
 Thank you for your detailed feedback. We appreciate your recognition of our interesting idea of leveraging and improving upon previous trajectories, as well as the performance improvements demonstrated through our experiments and ablation studies. We are also grateful for your positive assessment of the advantages our approach offers in **cross-trajectory information utilization** compared to existing MCTS methods. Below, we address each of your main concerns in detail:
 
 
-### **Method Implementation Details (For W1)**
+## **Method Implementation Details (For W1)**
 
-##### **Case Study: Fixing UnrecognizedUnit.__eq__ in Astropy**
+### **Case Study: Fixing UnrecognizedUnit.__eq__ in Astropy**
 
 Problem Description: Astropy's UnrecognizedUnit.__eq__ method throws exceptions instead of returning False when compared with None, violating Python's safety conventions for comparison operations.
 
@@ -85,7 +85,7 @@ Select the highest-scoring trajectory from candidates as the final solution:
 
 **Key Innovation**: This trajectory-level collaboration is **unachievable by traditional methods** like MCTS that rely solely on model capabilities for diversified sampling—they can only generate mutually independent trajectories, **unable to achieve collaborative evolution and knowledge transfer** between trajectories.
 
-### **Ground Truth Leakage Concern (For W2)**
+## **Ground Truth Leakage Concern (For W2)**
 
 Our evaluation function consists of two components: 
 
@@ -103,7 +103,7 @@ This procedure **does not require access to ground-truth labels** or test oracle
 
 We acknowledge that our use of the term **"test pass rate"** may have led to confusion, as it could be misinterpreted as indicating the use of ground-truth tests. In fact, the "pass rate" refers only to the internal validation of structural constraints necessary for a trajectory to be considered valid and potentially effective—**not whether it actually solves the task**. We will revise this in the final version, modifying it to **"validation rate"** and describing our evaluation function in more detail.
 
-### **Concrete Examples (For W3)**
+## **Concrete Examples (For W3)**
 
 As shown in the complete example provided in our response to W1, we have illustrated in detail **how each operation specifically modifies and improves the trajectories**. This example comprehensively demonstrates the entire process—from initial trajectory generation, quality evaluation, and cross-trajectory fusion to the selection of the final solution—including **concrete changes in trajectory content** and the resulting improvements.
 
@@ -112,12 +112,12 @@ As shown in the complete example provided in our response to W1, we have illustr
 We will add a dedicated limitation section in the final version to discuss computational overhead and the applicable scope of our method. Our approach has indeed achieved **significant performance gains** (up to 55% relative improvement) and **SOTA results**, which validate the effectiveness of the trajectory-level self-evolution paradigm.
 
 
-## Response to Reviewer c1xU
+# Response to Reviewer c1xU
 
 Thank you for your detailed feedback. We appreciate your recognition that our three-step mechanism represents a substantial advancement over existing trajectory sampling and MCTS methods. Below, we address each of your main concerns:
 
 
-### **Clarification on the Term "Self-Evolution" (For W1)**
+## **Clarification on the Term "Self-Evolution" (For W1)**
 
 We understand the reviewer's concerns about our use of the term **"self-evolution."** SE-Agent embodies a **genuine evolutionary principle** that goes beyond individual trajectory sampling:
 
@@ -138,7 +138,7 @@ Unlike simple sampling, trajectories in SE-Agent **actively influence and evolve
 
 **Concrete Case Demonstration:**
 
-##### **Case Study: Fixing UnrecognizedUnit.__eq__ in Astropy**
+### **Case Study: Fixing UnrecognizedUnit.__eq__ in Astropy**
 
 **Problem Description**: Astropy's UnrecognizedUnit.__eq__ method throws exceptions instead of returning False when compared with None, violating Python's safety conventions for comparison operations.
 
@@ -218,7 +218,7 @@ Select the highest-scoring trajectory from candidates as the final solution:
 
 **Key Innovation**: This trajectory-level collaboration is **unachievable by traditional methods** like MCTS that rely solely on model capabilities for diversified sampling—they can only generate mutually independent trajectories, **unable to achieve collaborative evolution and knowledge transfer** between trajectories.
 
-### **Experimental Fairness (For W2)**
+## **Experimental Fairness (For W2)**
 
 We acknowledge using different model versions might affect comparison fairness. We conducted **additional experiments** using the same model across all methods:
 
@@ -235,7 +235,7 @@ We acknowledge using different model versions might affect comparison fairness. 
 
 These results validate our framework's effectiveness, achieving **SOTA performance** on SWE-bench Verified.
 
-### **More Ablation Study of Refinement (For W3)**
+## **More Ablation Study of Refinement (For W3)**
 
 To ensure completeness of our ablation analysis, we conducted additional experiments removing the Refinement component:
 
@@ -249,7 +249,7 @@ To ensure completeness of our ablation analysis, we conducted additional experim
 
 The results demonstrate that **all three components make significant contributions** to the overall performance of SE-Agent. We will include a detailed discussion of this ablation study in the revised version of the paper.
 
-### **Clarification on "Pilot Trajectories" (For W4)**
+## **Clarification on "Pilot Trajectories" (For W4)**
 
 "Pilot trajectories" are initial trajectories using different planning strategies:
 - **P-greedy**: Rapid localization and fixing
@@ -265,12 +265,12 @@ These provide the **foundation** for evolutionary operations, ensuring **broad s
 We will correct the typo in line 120 and add a **"Limitations"** section discussing computational overhead and applicable scope. These clarifications demonstrate SE-Agent's **robustness** through genuine trajectory-level evolution **unattainable by traditional sampling methods**.
 
 
-## Response to Reviewer JbMn
+# Response to Reviewer JbMn
 
 Thank you for reviewing our paper and providing such insightful feedback. We greatly appreciate your recognition of the clarity of our writing, the well-structured mathematical formulations, and the **strong empirical performance** of our proposed framework on the SWE-bench Verified. Furthermore, we have thoroughly addressed your concern as follows:
 
 
-### **Inference Time Comparison (For W1)**
+## **Inference Time Comparison (For W1)**
 
 As **SE-Agent** is designed with efficiency in mind, particularly when compared to frameworks like SWE-Search (based on MCTS), we conduct additional experiments to quantify the average inference time required to solve a single instance successfully. This evaluation focuses on the average wall-clock time per solved case, which we believe is a practical metric for real-world deployment and large-scale adoption. The results are as follows:
 
@@ -287,11 +287,11 @@ As **SE-Agent** is designed with efficiency in mind, particularly when compared 
 Due to time constraints, we are currently only able to provide inference time comparison results based on Claude-3.7-Sonnet. However, we fully recognize the importance of this evaluation and commit to including a comprehensive inference time analysis—covering all relevant baselines—in the revised version of the paper.
 
 
-## Response to Reviewer aGqC
+# Response to Reviewer aGqC
 
 Thank you for your insightful feedback and recognition of our **strong empirical results** and substantial improvements over baselines on SWE-bench. We address your concerns as follows:
 
-### **The contributions of SE-Agent (For W1)**
+## **The contributions of SE-Agent (For W1)**
 
 While leveraging historical experience is part of our approach, SE-Agent's core contribution lies in **expanding the search space through multi-trajectory interaction**, overcoming single-trajectory reasoning limitations. This process corresponds to crossover and mutation operations in genetic evolutionary theory, not merely refining individual trajectories.
 
@@ -306,17 +306,17 @@ b. **Knowledge transfer**: Successful patterns transfer across trajectories thro
 
 This fosters **emergent population-level intelligence**. Our experiments show relative gains up to **112% (Llama-3.1-70B)** and **51% (Claude-3.7-Sonnet)**, demonstrating **true capability evolution** beyond individual trajectory sampling.
 
-### **The Choice of Benchmark (For W2)**
+## **The Choice of Benchmark (For W2)**
 
 We focus on **SWE-bench Verified** because it presents significant challenges requiring cross-file bug localization, patch generation, and test validation over real-world repositories. Even top models achieve only 50-60% success. Leading works like **SWE-agent and SWE-search** report main results on this benchmark.
 
 LiveCodeBench emphasizes single-turn generation rather than multi-step interaction. Terminal-Bench aligns well with SE-Agent's capabilities but requires additional engineering work—a promising future direction.
 
-### **A description of the Operators (For W3&W4)**
+## **A description of the Operators (For W3&W4)**
 
 We demonstrate our specific operations through the following case:
 
-##### **Case Study: Fixing UnrecognizedUnit.__eq__ in Astropy**
+### **Case Study: Fixing UnrecognizedUnit.__eq__ in Astropy**
 
 **Problem Description**: Astropy's UnrecognizedUnit.__eq__ method throws exceptions instead of returning False when compared with None, violating Python's safety conventions for comparison operations.
 
@@ -396,7 +396,7 @@ Select the highest-scoring trajectory from candidates as the final solution:
 
 **Key Innovation**: This trajectory-level collaboration is **unachievable by traditional methods** like MCTS that rely solely on model capabilities for diversified sampling—they can only generate mutually independent trajectories, **unable to achieve collaborative evolution and knowledge transfer** between trajectories.
 
-### **Discussion of Resource Overhead (For W5)**
+## **Discussion of Resource Overhead (For W5)**
 
 While our method introduces **additional cost** due to multiple trajectories, this overhead is **justified by significant performance gains**.
 
