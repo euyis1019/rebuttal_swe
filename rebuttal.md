@@ -233,7 +233,7 @@ We acknowledge using different model versions might affect comparison fairness. 
 | TRAE                            | 75.2%                            |
 | **SE-Agent + Claude 4 Sonnet**  | **80.0%**                        |
 
-These results validate our framework's effectiveness, achieving **SOTA performance** on SWE-bench Verified.
+These results validate our framework's effectiveness, achieving **SOTA performance** on SWE-bench Verified. We are currently submitting these performance results to the **SWE-bench leaderboard**.
 
 ## **More Ablation Study of Refinement (For W3)**
 
@@ -274,7 +274,7 @@ Thank you for reviewing our paper and providing such insightful feedback. We gre
 
 As **SE-Agent** is designed with efficiency in mind, particularly when compared to frameworks like SWE-Search (based on MCTS), we conduct additional experiments to quantify the average inference time required to solve a single instance successfully. This evaluation focuses on the average wall-clock time per solved case, which we believe is a practical metric for real-world deployment and large-scale adoption. The results are as follows:
 
-| Method               | Time Cost (min) | Resolved Rate (%) |
+| Method               | Inference Time (min) | Resolved Rate (%) |
 |----------------------|-----------------|-------------------|
 | SWE-Agent            | 15.61           | 40.6              |
 | SWE-Search (MCTS)    | 33.42           | 47.4              |
